@@ -1,1 +1,45 @@
--- 
+-- таблица 1
+
+
+
+CREATE TABLE posts(
+  id SERIAL PRIMARY KEY,
+  USER BIGINT UNSIGNED NOT NULL,
+  media_types INT UNSIGNED NOT NULL,
+  texts VARCHAR(100),
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (media_types)
+  REFERENCES media_types(id),
+  FOREIGN KEY (USER) REFERENCES users(id)
+  );
+ 
+INSERT INTO posts VALUES(DEFAULT, 1, 1, 'Адская программа', DEFAULT);
+
+ 
+ -- таблица 2
+ 
+ CREATE TABLE likes(
+   from_user_id BIGINT UNSIGNED NOT NULL,
+   to_user_id  BIGINT UNSIGNED NOT NULL,
+   accepter BOOL DEFAULT FALSE,
+   PRIMARY KEY (from_user_id, to_user_id),
+   FOREIGN KEY (from_user_id) REFERENCES users(id),
+   FOREIGN KEY (to_user_id) REFERENCES users(id)
+   );
+  
+INSERT INTO likes VALUES (1,2,DEFAULT); 
+INSERT INTO likes VALUES (2,1,TRUE) 
+
+-- таблица 3
+
+CREATE TABLE personal_data( 
+  user_id SERIAL PRIMARY KEY, 
+  interests VARCHAR(130), 
+  work VARCHAR(130), 
+  education VARCHAR(130), 
+  career VARCHAR(130), 
+  worldview VARCHAR(130), 
+  religion VARCHAR(130), 
+  FOREIGN KEY (user_id) REFERENCES users (id) 
+); 
+INSERT INTO personal_data VALUES (DEFAULT,'Солнце', 'Песок', 'Море', 'Пляж', '2022-08-10', 'Хочу');
