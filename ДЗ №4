@@ -1,0 +1,16 @@
+-- i. Заполнить все таблицы БД vk данными (не больше 10-20 записей в каждой таблице)
+  SELECT DISTINCT first_name FROM users ORDER BY last_name ASC;
+
+-- ii. Написать скрипт, возвращающий список имен (только firstname) пользователей без повторений в алфавитном порядке
+  SELECT DISTINCT first_name FROM users ORDER BY first_name ASC;
+
+-- iii. Написать скрипт, отмечающий несовершеннолетних пользователей как неактивных (поле is_active = false).
+-- Предварительно добавить такое поле в таблицу profiles со значением по умолчанию = true (или 1)
+  ALTER TABLE profiles ADD COLUMN is_active BOOLEAN DEFAULT TRUE;
+  UPDATE profiles SET is_active = 0 WHERE timestampdiff(YEAR, birthday, now()) < 18;
+
+ -- iv. Написать скрипт, удаляющий сообщения «из будущего» (дата больше сегодняшней)
+  DELETE  FROM messages WHERE created_at > now();
+
+-- v. Написать название темы курсового проекта (в комментарии)
+  Я еще не знаю что я смогу написать))))
